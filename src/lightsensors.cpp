@@ -1,4 +1,5 @@
 #include <chrono>
+#include <fstream>
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/int16_multi_array.hpp"
 
@@ -17,6 +18,14 @@ private:
     void timer_callback()
     {
         auto message = std_msgs::msg::Int16MultiArray();
+
+        std::ifstream ifs("/tmp/rtlightsensors");
+	int16_t value;
+	for(int i=0;i<4;i++){
+		ifs >> value;
+		message.data.push_back(value);
+	}
+
         publisher_->publish(message);
     }
 
