@@ -10,8 +10,8 @@ class Lightsensors : public rclcpp::Node
 public:
     Lightsensors() : Node("lightsensors")
     {
-        publisher_ = this->create_publisher<std_msgs::msg::Int16MultiArray>("lightsensors", 10);
-	timer_ = this->create_wall_timer(100ms, std::bind(&Lightsensors::timer_callback, this));
+        publisher_ = create_publisher<std_msgs::msg::Int16MultiArray>("lightsensors", 10);
+	timer_ = create_wall_timer(100ms, std::bind(&Lightsensors::timer_callback, this));
     }
 
 private:
